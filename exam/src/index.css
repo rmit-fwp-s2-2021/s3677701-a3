@@ -23,3 +23,16 @@ code {
 .active-btn{
   background-color: skyblue;
 }
+
+.form-container .form-control{
+  width: 30%;
+  display: inline;
+}
+
+.meals{
+  margin-left: 4rem;
+}
+
+.form-container .btn-primary{
+  padding: 10px 40px;
+}

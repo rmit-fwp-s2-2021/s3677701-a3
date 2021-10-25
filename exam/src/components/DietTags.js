@@ -22,7 +22,7 @@ export default function DietTags(props) {
               props.handleTagSelect(event, "tag-" + index);
             }}
           >
-            <i class={tag.icon}></i>
+            <i className={tag.icon}></i>
             <br />
             {tag.name}
           </button>
