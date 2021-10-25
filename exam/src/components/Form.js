@@ -23,7 +23,8 @@ export default function Form() {
 
     if (handleValidation()) {
       const data = {
-        fields: fields,
+        meals: fields.meals,
+        calories: fields.calories,
         diet_type: diet_type,
       };
 
