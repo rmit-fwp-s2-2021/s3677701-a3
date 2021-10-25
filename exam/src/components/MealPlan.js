@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
-import { getMeals, Meals } from "../data/repository";
+import { getMeals, Meals, setPlan } from "../data/repository";
 import MealCard from "./MealCard";
 
 export default function MealPlan(props) {
@@ -10,14 +10,14 @@ export default function MealPlan(props) {
   useEffect(() => {
     const fields = location.state.fields;
     const all_meals = getMeals(fields.diet_type, fields.meals, fields.calories);
-    console.log(all_meals);
     setMeals(all_meals);
+    setPlan(all_meals)
   }, []);
 
   const getTotalCalories = (meals) => {
       let calorie_count = 0;
       for(const meal of meals){
-          calorie_count += meal.calories;
+          calorie_count += (meal.calories * meal.quantity);
       }
       return calorie_count;
   }
@@ -26,10 +26,8 @@ export default function MealPlan(props) {
     const render_values = []
 
     const breakfast_meals = meals.filter((m) => m.type === "Breakfast");
-    let breakfast_calorie_count = 0;
-    for (const breakfast_meal of breakfast_meals) {
-      breakfast_calorie_count += breakfast_meal.calories;
-    }
+    let breakfast_calorie_count = getTotalCalories(breakfast_meals);
+    
     if (breakfast_meals.length > 0) {
       render_values.push(
         <div className="card">
@@ -98,7 +96,6 @@ export default function MealPlan(props) {
       </h3>
         </div>
 
-      {/*Card for each type */}
       {renderMeals()}
     </div>
   );

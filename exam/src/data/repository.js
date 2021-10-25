@@ -57,7 +57,7 @@ const Meals = {
     breakfast: {
       meals: [
         {
-          name: "Knock-Oats",
+          name: "Vegan Knock-Oats",
           img: "knock-oats.PNG",
           calories: 451,
           type: "Breakfast",
@@ -67,8 +67,8 @@ const Meals = {
     lunch: {
       meals: [
         {
-          name: "Strawberry Protein Smoothie",
-          img: "strawberry-smoothie",
+          name: "Kale Smoothie",
+          img: "kale-smoothie.PNG",
           calories: 400,
           type: "Lunch",
         },
@@ -83,14 +83,14 @@ const Meals = {
     dinner: {
       meals: [
         {
-          name: "Asian Style Beef and Broccoli",
-          img: "beef.PNG",
+          name: "Vegetable Stir Fry",
+          img: "vege-stir.PNG",
           calories: 246.5,
           type: "Dinner",
         },
         {
-          name: "Vegan Fried Rice",
-          img: "fried-rice.PNG",
+          name: "Vegan Dumplings",
+          img: "dumplings.PNG",
           calories: 250,
           type: "Dinner",
         },
@@ -99,8 +99,8 @@ const Meals = {
     snack: {
       meals: [
         {
-          name: "Mock meat sandwich",
-          img: "turkey.PNG",
+          name: "Vegan sandwich",
+          img: "vegan-sandwich.PNG",
           calories: 177,
           type: "Snack",
         },
@@ -111,11 +111,11 @@ const Meals = {
 
 
 /**
- * 
- * @param {*} diet_type 
- * @param {number} meals 
+ * Get meal for specified params.
+ * @param {string} diet_type
+ * @param {string} meals 
  * @param {number} calories 
- * @returns 
+ * @returns List of meal objects
  */
 function getMeals(diet_type, meals, calories){
   let meal_plan = Meals
@@ -145,7 +145,7 @@ function getMeals(diet_type, meals, calories){
   }
 
   // filter by calories.
-  const max_calories = calories;
+  let max_calories = calories;
   const acceptable_meals = []
 
   for(const meal_choices of daily_meals){
@@ -154,25 +154,27 @@ function getMeals(diet_type, meals, calories){
       if(max_calories >= food_calories){
         const meal_plan_item = createMealPlanItem(choice.type, choice.name, choice.calories, choice.img);
         acceptable_meals.push(meal_plan_item)
+        max_calories -= food_calories;
       }else{
+        // Out of acceptable calories.
         break;
       }
     }
   }
 
+  // Check for leftover calories and increase serving size.
+  if(max_calories >= 1000){
+    for(let i = 0; i < acceptable_meals.length; i++){
+      if(acceptable_meals[i].quantity >= 1){
+        acceptable_meals[i].quantity++;
+        max_calories -= acceptable_meals[i].calories;
+      }
+    }
+  }
   return acceptable_meals;
 
 }
 
-/**
- * 
- * @param {*} meal_type 
- * @param {*} meal_name 
- * @param {*} calories 
- * @param {*} img 
- * @param {*} quantity 
- * @returns 
- */
 function createMealPlanItem(meal_type, meal_name, calories, img, quantity = 1){
  const meal_item = {
    type: meal_type,
