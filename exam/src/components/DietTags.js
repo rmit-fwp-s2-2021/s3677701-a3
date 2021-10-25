@@ -19,7 +19,7 @@ export default function DietTags(props) {
             className="btn btn-small"
             id={"tag-" + index}
             onClick={(event) => {
-              props.handleTagSelect(event, "tag-" + index);
+              props.handleTagSelect(event, "tag-" + index, tag.name);
             }}
           >
             <i className={tag.icon}></i>

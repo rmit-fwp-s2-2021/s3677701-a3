@@ -5,9 +5,11 @@ export default function Form() {
 
 
     const [fields, setFields] = useState({
-        meals: 0,
+        meals: 2,
         calories: 0
     })
+
+    const [diet_type, setDietType] = useState(null)
 
   const [errors, setErrors] = useState({});
 
@@ -17,10 +19,31 @@ export default function Form() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if(handleValidation()){
+
+    }
     console.log("Sbumit");
   };
 
-  const handleTagSelect = (event, tag_id) => {
+  const handleValidation = () => {
+      const current_errors = {};
+      let key = "meals"
+      let field = fields[key]
+      if (field === 0) current_errors[key] = "Meals need to be selected.";
+
+    key = "calories"
+      field = fields[key]
+      if (field <= 0) current_errors[key] = "Calorie amount needs to be entered and must be greater than 0.";
+
+      key = "diet_type"
+      // check if a diet type is selected
+      if(diet_type === null) current_errors[key] = "A diet type needs to be selected."
+
+    setErrors(current_errors)
+      return Object.keys(current_errors).length === 0;
+  }
+
+  const handleTagSelect = (event, tag_id, tag_name) => {
     event.preventDefault();
     const active_class = "active-btn";
 
@@ -31,28 +54,44 @@ export default function Form() {
     }
 
     const tag = document.querySelector("#" + tag_id);
-    tag.classList.toggle(active_class);
+    // Toggle and add to state.
+    if(tag.classList.contains(active_class)){
+        tag.classList.remove(active_class);
+        setDietType(null);
+    }else{
+        tag.classList.add(active_class);
+        setDietType(tag_name)
+    }
   };
 
   return (
     <div className="form-container text-center">
       <form onSubmit={handleSubmit}>
         <DietTags handleTagSelect={handleTagSelect} />
+        {errors.diet_type && (
+                <div className="text-danger">{errors.diet_type}</div>
+              )}
         <div>&nbsp;</div>
         <div className="form-group">
           <label htmlFor="calories">I want to eat</label>{" "}
-          <input id="calories" type="number" className="form-control" name="calories" onChange={handleInputChange}></input>
+          <input id="calories" type="number" min="0" className="form-control" name="calories" onChange={handleInputChange}></input>
+          {errors.calories && (
+                <div className="text-danger">{errors.calories}</div>
+              )}
           <label>Calories</label>
         </div>
 
         <div className="meals form-group">
           <label htmlFor="meals">in</label>{" "}
           <select id="inputState" className="form-control" name="meals" onChange={handleInputChange}>
-            <option defaultValue>2</option>
+            <option>2</option>
             <option>3</option>
             <option>4</option>
           </select>
           <label>meals</label>
+          {errors.meals && (
+                <div className="text-danger">{errors.meals}</div>
+              )}
         </div>
         <div>
           <input
