@@ -6,7 +6,7 @@ export default function Form() {
   const history = useHistory();
 
   const [fields, setFields] = useState({
-    meals: 2,
+    meals: "2",
     calories: 0,
   });
 
