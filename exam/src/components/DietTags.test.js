@@ -31,20 +31,20 @@ test("Render tags", () => {
  * Test also ensures that the right tag name is displayed which prevents typos getting into production or wrong tags displayed.
  */
 test("Contains all tags", () => {
-    const tag_container = document.querySelector(".tags");
-    expectTagContainer_Btns_ToBe(tag_container, tags.length);
+  const tag_container = document.querySelector(".tags");
+  expectTagContainer_Btns_ToBe(tag_container, tags.length);
 
-    // Ensure tag data has been displayed.
-    const btn = tag_container.getElementsByTagName("button");
-    for(let i = 0; i < btn.length; i++){
-        const text = btn[i].textContent;
-        expect(text).toContain(tags[i].name);
-    }
+  // Ensure tag data has been displayed.
+  const btn = tag_container.getElementsByTagName("button");
+  for (let i = 0; i < btn.length; i++) {
+    const text = btn[i].textContent;
+    expect(text).toContain(tags[i].name);
+  }
 });
 
-function expectTagContainer_Btns_ToBe(tag_container, length){
-    expect(tag_container).toBeInTheDocument();
+function expectTagContainer_Btns_ToBe(tag_container, length) {
+  expect(tag_container).toBeInTheDocument();
 
-    const btn = tag_container.getElementsByTagName("button");
-    expect(btn).toHaveLength(length);
+  const btn = tag_container.getElementsByTagName("button");
+  expect(btn).toHaveLength(length);
 }
