@@ -36,3 +36,13 @@ code {
 .form-container .btn-primary{
   padding: 10px 40px;
 }
+
+.meal-plans img {
+  height: 200px;
+  width: 200px;
+}
+
+.meal-plans .card{
+  width: 70%;
+  padding: 35px;;
+}

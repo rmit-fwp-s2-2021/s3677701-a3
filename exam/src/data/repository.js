@@ -6,6 +6,7 @@ const Meals = {
           name: "Knock-Oats",
           img: "knock-oats.PNG",
           calories: 451,
+          type: "Breakfast",
         },
       ],
     },
@@ -13,13 +14,15 @@ const Meals = {
       meals: [
         {
           name: "Strawberry Protein Smoothie",
-          img: "strawberry-smoothie",
+          img: "strawberry-smoothie.PNG",
           calories: 400,
+          type: "Lunch",
         },
         {
           name: "Banana",
           img: "banana.PNG",
           calories: 89,
+          type: "Lunch",
         },
       ],
     },
@@ -29,11 +32,13 @@ const Meals = {
           name: "Asian Style Beef and Broccoli",
           img: "beef.PNG",
           calories: 246.5,
+          type: "Dinner",
         },
         {
           name: "Fried Rice",
           img: "fried-rice.PNG",
           calories: 250,
+          type: "Dinner",
         },
       ],
     },
@@ -43,6 +48,7 @@ const Meals = {
           name: "Turkey Sandwich",
           img: "turkey.PNG",
           calories: 177,
+          type: "Snack",
         },
       ],
     },
@@ -54,6 +60,7 @@ const Meals = {
           name: "Knock-Oats",
           img: "knock-oats.PNG",
           calories: 451,
+          type: "Breakfast",
         },
       ],
     },
@@ -63,11 +70,13 @@ const Meals = {
           name: "Strawberry Protein Smoothie",
           img: "strawberry-smoothie",
           calories: 400,
+          type: "Lunch",
         },
         {
           name: "Banana",
           img: "banana.PNG",
           calories: 89,
+          type: "Lunch",
         },
       ],
     },
@@ -77,11 +86,13 @@ const Meals = {
           name: "Asian Style Beef and Broccoli",
           img: "beef.PNG",
           calories: 246.5,
+          type: "Dinner",
         },
         {
           name: "Vegan Fried Rice",
           img: "fried-rice.PNG",
           calories: 250,
+          type: "Dinner",
         },
       ],
     },
@@ -91,6 +102,7 @@ const Meals = {
           name: "Mock meat sandwich",
           img: "turkey.PNG",
           calories: 177,
+          type: "Snack",
         },
       ],
     },
@@ -133,7 +145,6 @@ function getMeals(diet_type, meals, calories){
   }
 
   // filter by calories.
-
   const max_calories = calories;
   const acceptable_meals = []
 
@@ -141,7 +152,7 @@ function getMeals(diet_type, meals, calories){
     for(const choice of meal_choices.meals){
       const food_calories = choice.calories;
       if(max_calories >= food_calories){
-        const meal_plan_item = createMealPlanItem("Breakfast", choice.name, choice.calories, choice.img);
+        const meal_plan_item = createMealPlanItem(choice.type, choice.name, choice.calories, choice.img);
         acceptable_meals.push(meal_plan_item)
       }else{
         break;
@@ -164,8 +175,8 @@ function getMeals(diet_type, meals, calories){
  */
 function createMealPlanItem(meal_type, meal_name, calories, img, quantity = 1){
  const meal_item = {
-   meal_type: meal_type,
-   meal_name: meal_name,
+   type: meal_type,
+   name: meal_name,
    calories: calories,
    img: img,
    quantity: quantity,
