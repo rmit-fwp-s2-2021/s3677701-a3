@@ -21,6 +21,9 @@ beforeEach(() => {
   container = utils.container;
 });
 
+/**
+ * Test to check if component renders. Good test to have as it checks if a component is returned.
+ */
 test("Render tags", () => {
   expect(container).toBeInTheDocument();
 });

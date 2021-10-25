@@ -6,12 +6,14 @@ import MealCard from "./MealCard";
 export default function MealPlan(props) {
   const location = useLocation();
   const [meals, setMeals] = useState([]);
+  const [total_calories, setCalories] = useState(0);
 
   useEffect(() => {
     const fields = location.state.fields;
     const all_meals = getMeals(fields.diet_type, fields.meals, fields.calories);
     setMeals(all_meals);
     setPlan(all_meals)
+    setCalories(getTotalCalories(all_meals));
   }, []);
 
   const getTotalCalories = (meals) => {
@@ -91,7 +93,7 @@ export default function MealPlan(props) {
         <div className="text-center">
         <h1>Today's Meal plan</h1>
       <h3>
-        <i className="fas fa-chart-pie"></i> {location.state.fields.calories}{" "}
+        <i className="fas fa-chart-pie"></i> {total_calories}{" "}
         Calories
       </h3>
         </div>

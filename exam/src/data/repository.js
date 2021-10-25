@@ -125,7 +125,7 @@ function getMeals(diet_type, meals, calories){
     meal_plan = Meals.vegan;
   }else{
     console.log(`Bad input. Unknown diet type: ${diet_type}`)
-    return;
+    return []
   }
 
   let daily_meals = ''
@@ -147,7 +147,7 @@ function getMeals(diet_type, meals, calories){
   // filter by calories.
   let max_calories = calories;
   const acceptable_meals = []
-
+  const acceptable_deviance = 40;
   for(const meal_choices of daily_meals){
     for(const choice of meal_choices.meals){
       const food_calories = choice.calories;
@@ -156,16 +156,23 @@ function getMeals(diet_type, meals, calories){
         acceptable_meals.push(meal_plan_item)
         max_calories -= food_calories;
       }else{
+        // check if calorie is still in acceptable range.
+        if(food_calories - max_calories <= acceptable_deviance){
+          const meal_plan_item = createMealPlanItem(choice.type, choice.name, choice.calories, choice.img);
+          acceptable_meals.push(meal_plan_item)
+          max_calories -= food_calories;
+        }
         // Out of acceptable calories.
         break;
       }
     }
   }
 
+
   // Check for leftover calories and increase serving size.
-  if(max_calories >= 1000){
+  if(max_calories >= 400){
     for(let i = 0; i < acceptable_meals.length; i++){
-      if(acceptable_meals[i].quantity >= 1){
+      if(acceptable_meals[i].quantity >= 1 && max_calories >= 0){
         acceptable_meals[i].quantity++;
         max_calories -= acceptable_meals[i].calories;
       }
