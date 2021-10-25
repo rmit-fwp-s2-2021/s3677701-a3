@@ -11,3 +11,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.tags i {
+  font-size: 3rem;
+}
+
+.tags i:hover{
+  color: skyblue;
+}
+
+.active-btn{
+  background-color: skyblue;
+}

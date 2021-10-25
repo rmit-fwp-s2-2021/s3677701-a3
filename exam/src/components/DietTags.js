@@ -3,11 +3,11 @@ import React from "react";
 export default function DietTags(props) {
   const tags = [
     { name: "Anything", icon: "fas fa-bread-slice" },
-    { name: "Paleo", icon: "" },
-    { name: "Vegetarian", icon: "" },
-    { name: "Vegan", icon: "" },
-    { name: "Ketogenic", icon: "" },
-    { name: "Mediterranean", icon: "" },
+    { name: "Paleo", icon: "fas fa-drumstick-bite" },
+    { name: "Vegetarian", icon: "fas fa-carrot" },
+    { name: "Vegan", icon: "fas fa-heart" },
+    { name: "Ketogenic", icon: "fas fa-egg" },
+    { name: "Mediterranean", icon: "fas fa-fish" },
   ];
 
   return (
@@ -23,6 +23,7 @@ export default function DietTags(props) {
             }}
           >
             <i class={tag.icon}></i>
+            <br />
             {tag.name}
           </button>
         );
