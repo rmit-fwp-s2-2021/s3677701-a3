@@ -1,6 +1,8 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Form from './components/Form';
+import MealPlan from './components/MealPlan';
+
 
 function App() {
   return (
@@ -8,6 +10,9 @@ function App() {
       <Router>
         <div className="container my-3">
           <Switch>
+            <Route path="/mealPlan">
+              <MealPlan fields={null}/>
+            </Route>
             <Route path="/">
               <Form />
             </Route>
