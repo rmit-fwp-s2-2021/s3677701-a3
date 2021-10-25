@@ -1,7 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import DietTags from "./DietTags";
 
 export default function Form() {
+
+
+    const [fields, setFields] = useState({
+        meals: 0,
+        calories: 0
+    })
+
+  const [errors, setErrors] = useState({});
+
+  const handleInputChange = (event) => {
+    setFields({ ...fields, [event.target.name]: event.target.value });
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log("Sbumit");
@@ -28,13 +41,13 @@ export default function Form() {
         <div>&nbsp;</div>
         <div className="form-group">
           <label htmlFor="calories">I want to eat</label>{" "}
-          <input id="calories" type="number" className="form-control"></input>
+          <input id="calories" type="number" className="form-control" name="calories" onChange={handleInputChange}></input>
           <label>Calories</label>
         </div>
 
         <div className="meals form-group">
           <label htmlFor="meals">in</label>{" "}
-          <select id="inputState" className="form-control">
+          <select id="inputState" className="form-control" name="meals" onChange={handleInputChange}>
             <option defaultValue>2</option>
             <option>3</option>
             <option>4</option>
@@ -42,11 +55,11 @@ export default function Form() {
           <label>meals</label>
         </div>
         <div>
-        <input
-          type="submit"
-          className="btn btn-primary"
-          value="Generate"
-        ></input>
+          <input
+            type="submit"
+            className="btn btn-primary"
+            value="Generate"
+          ></input>
         </div>
       </form>
     </div>
