@@ -1,5 +1,5 @@
 # s3677701-a3
-Further Web Programming Exam for semeser 2 2021
+Further Web Programming Exam for semeser 2 2021. This is a meal plan generator. This app was developed in 12 hours.
 
 ## Only "Anything" and "Vegan" meal types are implemented.
 
